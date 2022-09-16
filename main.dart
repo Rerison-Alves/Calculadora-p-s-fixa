@@ -7,16 +7,16 @@ void main(){
 } 
 
 void calcula(var expressao){
-  List<int> pilha = [];
+  List<double> pilha = [];
   for(var x in expressao.split(' ')){
     if(x!='+' && x!='-' && x!='*' && x!='/'){
-      pilha.add(int.parse(x));
+      pilha.add(double.parse(x));
     }else{
       switch(x){
         case '+':{
-          int b = pilha.last;
+          double b = pilha.last;
           pilha.removeLast();
-          int a = pilha.last;
+          double a = pilha.last;
           pilha.removeLast();
           print(a+b);
           pilha.add(a+b);
@@ -24,15 +24,30 @@ void calcula(var expressao){
         }
         break;
         case '-':{
-            
+          double b = pilha.last;
+          pilha.removeLast();
+          double a = pilha.last;
+          pilha.removeLast();
+          print(a-b);
+          pilha.add(a-b);
         }
         break;
         case '*':{
-              
+          double b = pilha.last;
+          pilha.removeLast();
+          double a = pilha.last;
+          pilha.removeLast();
+          print(a*b);
+          pilha.add(a*b);
         }
         break;
         case '/':{
-              
+          double b = pilha.last;
+          pilha.removeLast();
+          double a = pilha.last;
+          pilha.removeLast();
+          print(a/b);
+          pilha.add(a/b);
         }
         break;
       }

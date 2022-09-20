@@ -6,6 +6,21 @@ void main(){
   calcula(expressao);
 } 
 
+void push(Double i, List<Double> pilha, int top){
+  if(top!=0) {
+    pilha[++top] = i;
+  }else{
+    pilha[top] = i;
+  }
+}
+
+Double pop(List<Double> pilha, int top) {
+  Double i = pilha[top];
+  pilha[top]= new Double();
+  top--;
+  return i;
+}
+
 void calcula(var expressao){
   List<double> pilha = [];
   for(var x in expressao.split(' ')){

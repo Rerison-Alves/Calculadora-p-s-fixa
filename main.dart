@@ -6,68 +6,72 @@ void main(){
   calcula(expressao);
 } 
 
-void push(Double i, List<Double> pilha, int top){
-  if(top!=0) {
-    pilha[++top] = i;
-  }else{
-    pilha[top] = i;
-  }
+
+void push(double i, List<double> pilha, int top){
+  pilha[top] = i;
 }
 
-Double pop(List<Double> pilha, int top) {
-  Double i = pilha[top];
-  pilha[top]= new Double();
-  top--;
+double pop(List<double> pilha, int top) {
+  double i = pilha[top];
+  pilha[top]= 0;
   return i;
 }
 
 void calcula(var expressao){
-  List<double> pilha = [];
+  List<double> pilha = List.filled(200, 0);
+  int top=0;
   for(var x in expressao.split(' ')){
     if(x!='+' && x!='-' && x!='*' && x!='/'){
-      pilha.add(double.parse(x));
+      if(pilha[0]!=0) top++;
+      push(double.parse(x), pilha, top);
     }else{
       switch(x){
         case '+':{
-          double b = pilha.last;
-          pilha.removeLast();
-          double a = pilha.last;
-          pilha.removeLast();
-          print(a+b);
-          pilha.add(a+b);
-        
+          double b = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          double a = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          if(pilha[0]!=0) top++;
+          push(a+b, pilha, top);
         }
         break;
         case '-':{
-          double b = pilha.last;
-          pilha.removeLast();
-          double a = pilha.last;
-          pilha.removeLast();
-          print(a-b);
-          pilha.add(a-b);
+          double b = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          double a = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          if(pilha[0]!=0) top++;
+          push(a-b, pilha, top);
         }
         break;
         case '*':{
-          double b = pilha.last;
-          pilha.removeLast();
-          double a = pilha.last;
-          pilha.removeLast();
-          print(a*b);
-          pilha.add(a*b);
+          double b = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          double a = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          if(pilha[0]!=0) top++;
+          push(a*b, pilha, top);
         }
         break;
         case '/':{
-          double b = pilha.last;
-          pilha.removeLast();
-          double a = pilha.last;
-          pilha.removeLast();
-          print(a/b);
-          pilha.add(a/b);
+          double b = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          double a = pilha[top];
+          pop(pilha, top);
+          if(top!=0) top--;
+          if(pilha[0]!=0) top++;
+          push(a/b, pilha, top);
         }
         break;
       }
-      print(pilha);
     }
   }
-  
+  print(pilha[0]);
 }

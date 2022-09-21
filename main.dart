@@ -8,7 +8,7 @@ void main() {
 }
 
 class Calculadora {
-  List<double> pilha = List.filled(200, 0);
+  List<double> pilha = List.filled(200, 1/0);
   int top = 0;
 
   double calcula(var expressao) {
@@ -53,14 +53,14 @@ class Calculadora {
   }
 
   void push(double i, List<double> pilha) {
-    if (pilha[0] != 0) top++;
+    if (pilha[0] != 1/0) top++;
     pilha[top] = i;
   }
 
   double pop(List<double> pilha) {
     double i = pilha[top];
     pilha[top] = 0;
-    if (top != 0) top--;
+    if (top != 1/0) top--;
     return i;
   }
 }

@@ -3,75 +3,70 @@ import 'dart:io';
 void main(){
   print('Digite a expressão:');
   var expressao = stdin.readLineSync();
-  calcula(expressao);
+  Calculadora calculadora = new Calculadora();
+  print(calculadora.calcula(expressao));
 } 
 
-
-void push(double i, List<double> pilha, int top){
-  pilha[top] = i;
+void push(double i, List<double> pilha){
+  if (pilha[0] != 0) Calculadora.top++;
+  pilha[Calculadora.top] = i;
 }
 
-double pop(List<double> pilha, int top) {
-  double i = pilha[top];
-  pilha[top]= 0;
+double pop(List<double> pilha) {
+  double i = pilha[Calculadora.top];
+  pilha[Calculadora.top]= 0;
+  if (Calculadora.top != 0) Calculadora.top--;
   return i;
 }
-
-void calcula(var expressao){
+class Calculadora {
   List<double> pilha = List.filled(200, 0);
-  int top=0;
-  for(var x in expressao.split(' ')){
-    if(x!='+' && x!='-' && x!='*' && x!='/'){
-      if(pilha[0]!=0) top++;
-      push(double.parse(x), pilha, top);
-    }else{
-      switch(x){
-        case '+':{
-          double b = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          double a = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          if(pilha[0]!=0) top++;
-          push(a+b, pilha, top);
+  static int top = 0;
+  double calcula(var expressao) {
+    for (var x in expressao.split(' ')) {
+      if (x != '+' && x != '-' && x != '*' && x != '/') {
+        push(double.parse(x), pilha);
+      } else {
+        switch (x) {
+          case '+':
+            {
+              double b = pilha[top];
+              pop(pilha);
+              double a = pilha[top];
+              pop(pilha);
+              push(a + b, pilha);
+            }
+            break;
+          case '-':
+            {
+              double b = pilha[top];
+              pop(pilha);
+              double a = pilha[top];
+              pop(pilha);
+              push(a - b, pilha);
+            }
+            break;
+          case '*':
+            {
+              double b = pilha[top];
+              pop(pilha);
+              double a = pilha[top];
+              pop(pilha);
+              push(a * b, pilha);
+            }
+            break;
+          case '/':
+            {
+              double b = pilha[top];
+              pop(pilha);
+              double a = pilha[top];
+              pop(pilha);
+              push(a / b, pilha);
+            }
+            break;
         }
-        break;
-        case '-':{
-          double b = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          double a = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          if(pilha[0]!=0) top++;
-          push(a-b, pilha, top);
-        }
-        break;
-        case '*':{
-          double b = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          double a = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          if(pilha[0]!=0) top++;
-          push(a*b, pilha, top);
-        }
-        break;
-        case '/':{
-          double b = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          double a = pilha[top];
-          pop(pilha, top);
-          if(top!=0) top--;
-          if(pilha[0]!=0) top++;
-          push(a/b, pilha, top);
-        }
-        break;
       }
     }
+    top=0;
+    return pilha[0];
   }
-  print(pilha[0]);
 }

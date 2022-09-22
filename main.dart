@@ -59,7 +59,7 @@ class Calculadora {
 
   double pop(List<double> pilha) {
     double i = pilha[top];
-    pilha[top] = 0;
+    pilha[top] = 1/0;
     if (top != 1/0) top--;
     return i;
   }

@@ -4,9 +4,8 @@ void main() {
   print('Digite a expressão:');
   var expressao = stdin.readLineSync();
   Calculadora calculadora = new Calculadora();
-  
-    print(calculadora.calcula(expressao));
-  
+
+  print(calculadora.calcula(expressao));
 }
 
 class Calculadora {
@@ -22,7 +21,7 @@ class Calculadora {
         }
       }
       if(expressao.isEmpty) {
-        print('DIGITE ALGUMA COISA');
+        print('Digite alguma coisa');
       }
 
       else {
@@ -58,6 +57,15 @@ class Calculadora {
         }
       }
     }
+    if(top>0){
+      print('ERRO: OPERADOR A MENOS');
+      exit(0);
+    }
+    if(top<0){
+      print('ERRO: OPERADOR A MAIS');
+      exit(0);
+    }
+
 
     top = 0;
     return pilha[0];
@@ -71,21 +79,11 @@ class Calculadora {
   double pop(List<double> pilha) {
     double i = pilha[top];
     pilha[top] = 0;
+
     if (top != 1/0) top--;
+
     return i;
+
   }
 }
 
-//bool numerico(String string) {
-
-  //final numericRegex =
-  //RegExp(r"^-?[0-9+*/ -]");
-
- // return numericRegex.hasMatch(string);
-//}
-
-//class Numeric implements Exception{
-  //String Msg() {
-    //return 'erro';
- // }
-//}

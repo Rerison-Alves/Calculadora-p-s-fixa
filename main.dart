@@ -4,7 +4,12 @@ void main() {
   print('Digite a expressão:');
   var expressao = stdin.readLineSync();
   Calculadora calculadora = new Calculadora();
-  print(calculadora.calcula(expressao));
+  //try {
+    print(calculadora.calcula(expressao));
+  //}
+  //on Numeric catch(e){
+    //print (e.Msg());
+  //}
 }
 
 class Calculadora {
@@ -14,8 +19,16 @@ class Calculadora {
   double calcula(var expressao) {
     for (var x in expressao.split(' ')) {
       if (x != '+' && x != '-' && x != '*' && x != '/') {
-        push(double.parse(x), pilha);
-      } else {
+        try {push(double.parse(x), pilha);}
+         catch(Exception){
+          print('DIGITE ALGO VÁLIDO');
+        }
+      }
+      if(expressao.isEmpty) {
+        print('Digite alguma coisa');
+      }
+
+      else {
         switch (x) {
           case '+':
             {
@@ -48,6 +61,17 @@ class Calculadora {
         }
       }
     }
+
+      //if(pilha.length==1 && x == '+' || x == '-' || x == '*' || x == '/'){
+        //print('erro');
+      //}
+
+
+      //if (!numerico(x)) {
+        //throw Numeric();
+      //}
+
+
     top = 0;
     return pilha[0];
   }
@@ -59,8 +83,22 @@ class Calculadora {
 
   double pop(List<double> pilha) {
     double i = pilha[top];
-    pilha[top] = 1/0;
+    pilha[top] = 0;
     if (top != 1/0) top--;
     return i;
   }
 }
+
+//bool numerico(String string) {
+
+  //final numericRegex =
+  //RegExp(r"^-?[0-9+*/ -]");
+
+ // return numericRegex.hasMatch(string);
+//}
+
+//class Numeric implements Exception{
+  //String Msg() {
+    //return 'erro';
+ // }
+//}

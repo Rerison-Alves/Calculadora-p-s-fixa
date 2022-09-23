@@ -4,12 +4,9 @@ void main() {
   print('Digite a expressão:');
   var expressao = stdin.readLineSync();
   Calculadora calculadora = new Calculadora();
-  //try {
+  
     print(calculadora.calcula(expressao));
-  //}
-  //on Numeric catch(e){
-    //print (e.Msg());
-  //}
+  
 }
 
 class Calculadora {
@@ -25,7 +22,7 @@ class Calculadora {
         }
       }
       if(expressao.isEmpty) {
-        print('Digite alguma coisa');
+        print('DIGITE ALGUMA COISA');
       }
 
       else {
@@ -61,16 +58,6 @@ class Calculadora {
         }
       }
     }
-
-      //if(pilha.length==1 && x == '+' || x == '-' || x == '*' || x == '/'){
-        //print('erro');
-      //}
-
-
-      //if (!numerico(x)) {
-        //throw Numeric();
-      //}
-
 
     top = 0;
     return pilha[0];
